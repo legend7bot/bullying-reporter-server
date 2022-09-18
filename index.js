@@ -7,6 +7,7 @@ import signinRoutes from './routes/signin.js';
 import signupRoutes from './routes/signup.js';
 import testRoutes from './routes/test.js';
 import reportRoutes from './routes/report.js';
+import adminReportRoutes from './routes/dashboard/adminReports.js';
 import authMiddleware from './middlewares/authMiddleware.js';
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(cors());
 app.use('/api/signin', signinRoutes);
 app.use('/api/signup', signupRoutes);
 app.use('/api/report', reportRoutes);
+app.use('/api/dashboard/reports', authMiddleware, adminReportRoutes);
 app.use('/api/test', authMiddleware, testRoutes);
 
 const port = process.env.PORT || 5000;

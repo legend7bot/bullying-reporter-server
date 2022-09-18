@@ -13,6 +13,18 @@ router.get('/all', async (req, res) => {
   }
 });
 
+router.get('/report/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const report = await Report.findById(id);
+    if (!report) return res.status(404).send({ message: 'Report not found' });
+    res.send(report);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: 'Internal Server Error' });
+  }
+});
+
 router.put('/update/:id', async (req, res) => {
   try {
     const { id } = req.params;
